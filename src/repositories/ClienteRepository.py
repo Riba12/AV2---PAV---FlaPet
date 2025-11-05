@@ -8,6 +8,7 @@ def get_all_clientes() :
     Returns:
         clientes (Cliente) -- contains all clientes registered.
     """
+    #SELECT * FROM CLIENTE
     clientes = db.session.query(Cliente).all()
     
     return clientes
@@ -27,7 +28,7 @@ def get_cliente_by_id(cliente_id: int) -> Cliente:
 def add_cliente(id: int, nome: str, cpf: str, telefone: str) -> Cliente:
     cliente = Cliente(id=id, nome=nome, cpf=cpf, telefone=telefone)
     
-    # INSERT INTO CLIENTE values (id, nome, email)
+    # INSERT INTO CLIENTE values (id, nome, cpf, telefone)
     db.session.add(cliente)
 
     # Confirma a execução
@@ -43,6 +44,7 @@ def update_cliente(id: int, nome: str, cpf: str, telefone: str) -> Cliente:
         cliente (Cliente) -- updated cliente.
     """
     # Verifica se o cliente existe
+    # SELECT * FROM CLIENTE WHERE id=cliente_id
     cliente = db.session.query(Cliente).get(id)
 
     if(not cliente):
@@ -64,6 +66,7 @@ def delete_cliente(cliente_id) -> Cliente:
         cliente (Cliente) -- deleted cliente.
     """
     # Verifica se o cliente existe
+    # SELECT * FROM CLIENTE WHERE id=cliente_id
     cliente = db.session.query(Cliente).get(cliente_id)
 
     if(not cliente):
