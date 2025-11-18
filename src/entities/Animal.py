@@ -8,11 +8,15 @@ class Animal(Base):
     # Colunas
     id = Column("id", Integer , primary_key=True)
     nome = Column("nome", String(255) , nullable=False)
-    especie = Column("especie", String(100) , nullable=False)
-    raca = Column("raca", String(100))
 
     # FK's
     cliente_id = Column("cliente_id", Integer, ForeignKey("Cliente.id", ondelete="CASCADE"), nullable=False)
 
+    raca_id = Column("raca_id", Integer, ForeignKey("Raca.id", ondelete="CASCADE"), nullable=False)
+    especie_id = Column("especie_id", Integer, ForeignKey("Especie.id", ondelete="CASCADE"), nullable=False)
+
     cliente = relationship("Cliente", back_populates="animais")
     agendamentos = relationship("Agendamento", back_populates="animal")
+
+    especie = relationship("Especie", back_populates="animais")
+    raca = relationship("Raca", back_populates="animais")
