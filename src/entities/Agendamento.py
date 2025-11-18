@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
+from sqlalchemy import Column, ForeignKey, Integer, Enum, DateTime
 from sqlalchemy.orm import relationship
 from src.entities.Base import Base
 import enum
@@ -16,7 +16,7 @@ class Agendamento(Base):
     # Colunas
     id = Column("id", Integer , primary_key=True)
     data_hora = Column("data_hora", DateTime)
-    status = Column(enum.Enum(StatusAgendamento), default=StatusAgendamento.PENDENTE, nullable=False)
+    status = Column(Enum(StatusAgendamento), default=StatusAgendamento.PENDENTE, nullable=False)
 
     # FK's
     servico_id = Column("servico_id", Integer, ForeignKey("Servico.id", ondelete="CASCADE"), nullable=False)
