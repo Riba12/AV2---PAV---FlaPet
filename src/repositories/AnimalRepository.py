@@ -1,4 +1,4 @@
-from src.entities import Animal
+from src.entities.Animal import Animal
 from src.entities.Base import db
 
 def get_all_animais() :
@@ -25,8 +25,8 @@ def get_animal_by_id(animal_id: int) -> Animal:
     
     return animal
 
-def add_animal(id: int, nome: str, especie: str, raca: str, cliente_id: int) -> Animal:
-    animal = Animal(id=id, nome=nome, especie=especie, raca=raca, cliente_id=cliente_id)
+def add_animal(nome: str, especie: str, raca: str, cliente_id: int) -> Animal:
+    animal = Animal(nome=nome, especie=especie, raca=raca, cliente_id=cliente_id)
     
     # INSERT INTO ANIMAL values (id, nome, especie, raca, cliente_id)
     db.session.add(animal)

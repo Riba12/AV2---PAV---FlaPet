@@ -26,13 +26,13 @@ def get_cliente_by_id(cliente_id: int) -> Cliente:
     
     return cliente
 
-def add_cliente(id: int, nome: str, cpf: str, telefone: str) -> Cliente:
+def add_cliente(nome: str, cpf: str, telefone: str) -> Cliente:
     """
     Insert a Cliente in the database.
     Returns:
         cliente (Cliente) -- inserted cliente.
     """
-    cliente = Cliente(id=id, nome=nome, cpf=cpf, telefone=telefone)
+    cliente = Cliente(nome=nome, cpf=cpf, telefone=telefone)
     
     # INSERT INTO CLIENTE values (id, nome, cpf, telefone)
     db.session.add(cliente)
