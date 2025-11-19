@@ -2,3 +2,6 @@ from src.repositories.AnimalRepository import delete_animal, update_animal, add_
 
 def getAllAnimais():
     return get_all_animais()
+
+def getAnimal(animal_id):
+    return get_animal_by_id(animal_id)
