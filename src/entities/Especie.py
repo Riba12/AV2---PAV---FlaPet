@@ -1,9 +1,11 @@
 from src.entities.Base import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
+import src.entities.Animal
+import src.entities.Raca
 
 class Especie(Base):
-    __tablename__ = "Especie"
+    __tablename__ = "especie"
 
     # Colunas
     id = Column("id", Integer , primary_key=True)

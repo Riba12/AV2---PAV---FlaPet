@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, DECIMAL
 from sqlalchemy.orm import relationship
 from src.entities.Base import Base
-
+import src.entities.Agendamento
 class Servico(Base):
-    __tablename__ = "Servico"
+    __tablename__ = "servico"
 
     # Colunas
     id = Column("id", Integer , primary_key=True)

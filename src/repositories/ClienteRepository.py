@@ -1,4 +1,4 @@
-from src.entities import Cliente
+from src.entities.Cliente import Cliente
 from src.entities.Base import db
 
 def get_all_clientes() :
@@ -9,8 +9,9 @@ def get_all_clientes() :
         clientes (Cliente) -- contains all clientes registered.
     """
     #SELECT * FROM CLIENTE
+    print("antes query")
     clientes = db.session.query(Cliente).all()
-    
+    print("depois query")
     return clientes
 
 def get_cliente_by_id(cliente_id: int) -> Cliente:
@@ -26,6 +27,11 @@ def get_cliente_by_id(cliente_id: int) -> Cliente:
     return cliente
 
 def add_cliente(id: int, nome: str, cpf: str, telefone: str) -> Cliente:
+    """
+    Insert a Cliente in the database.
+    Returns:
+        cliente (Cliente) -- inserted cliente.
+    """
     cliente = Cliente(id=id, nome=nome, cpf=cpf, telefone=telefone)
     
     # INSERT INTO CLIENTE values (id, nome, cpf, telefone)

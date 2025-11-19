@@ -1,6 +1,8 @@
 from sqlalchemy import Column, ForeignKey, Integer, Enum, DateTime
 from sqlalchemy.orm import relationship
 from src.entities.Base import Base
+import src.entities.Servico
+import src.entities.Animal
 import enum
 
 class StatusAgendamento(enum.Enum):
@@ -11,7 +13,7 @@ class StatusAgendamento(enum.Enum):
 
 
 class Agendamento(Base):
-    __tablename__ = "Agendamento"
+    __tablename__ = "agendamento"
 
     # Colunas
     id = Column("id", Integer , primary_key=True)
@@ -19,8 +21,8 @@ class Agendamento(Base):
     status = Column(Enum(StatusAgendamento), default=StatusAgendamento.PENDENTE, nullable=False)
 
     # FK's
-    servico_id = Column("servico_id", Integer, ForeignKey("Servico.id", ondelete="CASCADE"), nullable=False)
-    animal_id = Column("animal_id", Integer, ForeignKey("Animal.id", ondelete="CASCADE"), nullable=False)
+    servico_id = Column("servico_id", Integer, ForeignKey("servico.id", ondelete="CASCADE"), nullable=False)
+    animal_id = Column("animal_id", Integer, ForeignKey("animal.id", ondelete="CASCADE"), nullable=False)
 
     # Relacionamentos
     animal = relationship("Animal", back_populates="agendamentos")

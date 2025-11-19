@@ -1,9 +1,10 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from src.entities.Base import Base
+import src.entities.Animal
 
 class Cliente(Base):
-    __tablename__ = "Cliente"
+    __tablename__ = "cliente"
 
     # Colunas
     id = Column("id", Integer , primary_key=True)
