@@ -24,7 +24,6 @@ class AnimalList(MethodResource, Resource):
     @marshal_with(AnimalResponseSchema(many=True))
     def get(self):
         try:
-            # Camada de serviço para obter todos os animais
             animais = getAllAnimais()
             return animais, 200
         except OperationalError:

@@ -20,7 +20,6 @@ class ClienteList(MethodResource, Resource):
     @marshal_with(ClienteResponseSchema(many=True))
     def get(self):
         try:
-            # Camada de serviço para obter todos os clientes
             clientes = getAllClientes()
             return clientes, 200
         except OperationalError:

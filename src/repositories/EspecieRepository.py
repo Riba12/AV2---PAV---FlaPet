@@ -14,7 +14,7 @@ def get_lista_especies()-> list:
     
     return especies
 
-def get_especie(especie_id)-> Especie:
+def get_especie_by_id(especie_id:str)-> Especie:
     """
     Get one especie stored in the database.
 

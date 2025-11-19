@@ -14,7 +14,7 @@ def get_lista_servicos()-> list:
     
     return servicos
 
-def get_servico(servico_id)-> Servico:
+def get_servico_by_id(servico_id:str)-> Servico:
     """
     Get one servico stored in the database.
 

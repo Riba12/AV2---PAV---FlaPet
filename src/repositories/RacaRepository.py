@@ -14,7 +14,7 @@ def get_lista_racas() -> list:
     
     return racas
 
-def get_raca(raca_id: int) -> Raca:
+def get_raca_by_id(raca_id: int) -> Raca:
     """
     Get one raca stored in the database.
 

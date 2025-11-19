@@ -15,7 +15,7 @@ def get_lista_agendamentos()-> list:
     
     return agendamentos
 
-def get_agendamento(agendamento_id: int)-> Agendamento:
+def get_agendamento_by_id(agendamento_id: int)-> Agendamento:
     """
     Get one agendamento stored in the database.
 
