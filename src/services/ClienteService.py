@@ -6,7 +6,7 @@ from src.utils.validators import cpf_valido
 def getAllClientes():
     return get_all_clientes()
 
-def getCliente(cliente_id):
+def getCliente(cliente_id: int):
     return get_cliente_by_id(cliente_id)
 
 def addCliente(nome: str, cpf: str, telefone: str)-> Cliente:
@@ -30,5 +30,5 @@ def updateCliente(id: int, nome: str, cpf: str, telefone: str) -> Cliente:
     
     return update_cliente(id=id, nome=nome, cpf=cpf, telefone=telefone)
 
-def deleteCliente(cliente_id):
+def deleteCliente(cliente_id: int):
     return delete_cliente(cliente_id)
