@@ -19,3 +19,16 @@ def addCliente(nome: str, cpf: str, telefone: str)-> Cliente:
         raise ValueError("CPF já cadastrado.")
     
     return add_cliente(nome, cpf, telefone)
+
+def updateCliente(id: int, nome: str, cpf: str, telefone: str) -> Cliente:
+    if not cpf_valido(cpf):
+        raise ValueError("CPF inválido.")
+    
+    cadastrado = get_cliente_by_cpf(cpf)
+    if cadastrado and cadastrado.id != id:
+        raise ValueError("CPF já cadastrado.")
+    
+    return update_cliente(id=id, nome=nome, cpf=cpf, telefone=telefone)
+
+def deleteCliente(cliente_id):
+    return delete_cliente(cliente_id)
