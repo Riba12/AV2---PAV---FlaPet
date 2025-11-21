@@ -2,9 +2,9 @@ import re
 from marshmallow import Schema, ValidationError, fields, validates
 from flask_restful import Resource, abort
 from flask_apispec.views import MethodResource
-from flask_apispec import marshal_with
+from flask_apispec import marshal_with, use_kwargs
 from sqlalchemy.exc import OperationalError
-from src.services.RacaService import getAllRacas, get_raca_by_id
+from src.services.RacaService import getAllRacas, get_raca_by_id, addRaca, updateRaca, deleteRaca
 
 class RacaResponseSchema(Schema):
     id = fields.Int()
@@ -30,6 +30,15 @@ class RacaList(MethodResource, Resource):
             return racas, 200
         except OperationalError:
             abort(500, message="Internal Server Error")
+    
+    @use_kwargs(RacaRequestSchema, location=("form"))
+    @marshal_with(RacaResponseSchema)
+    def post(self, nome, especie_id):
+        try:
+            raca = addRaca(nome, especie_id)
+            return raca, 201
+        except OperationalError as err:
+            abort(500, message=str(err.__context__))
 
 class RacaItem(MethodResource, Resource):
     @marshal_with(RacaResponseSchema)
@@ -39,5 +48,25 @@ class RacaItem(MethodResource, Resource):
             if not raca:
                 abort(404, message="Raca not found")
             return raca, 200
+        except OperationalError:
+            abort(500, message="Internal Server Error")
+    
+    @use_kwargs(RacaRequestSchema, location=("form"))
+    @marshal_with(RacaResponseSchema)
+    def put(self, raca_id, nome, especie_id):
+        try:
+            raca = updateRaca(id=raca_id, nome=nome, especie_id=especie_id)
+            if not raca:
+                abort(404, message="Raca not found")
+            return raca, 200
+        except OperationalError as err:
+            abort(500, message=str(err.__context__))
+
+    def delete(self, raca_id):
+        try:
+            result = deleteRaca(raca_id)
+            if not result:
+                abort(404, message="Raca not found")
+            return '', 204
         except OperationalError:
             abort(500, message="Internal Server Error")
