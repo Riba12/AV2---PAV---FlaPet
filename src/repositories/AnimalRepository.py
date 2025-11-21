@@ -25,8 +25,8 @@ def get_animal_by_id(animal_id: int) -> Animal:
     
     return animal
 
-def add_animal(nome: str, especie: str, raca: str, cliente_id: int) -> Animal:
-    animal = Animal(nome=nome, especie=especie, raca=raca, cliente_id=cliente_id)
+def add_animal(nome: str, especie_id: int, raca_id: int, cliente_id: int) -> Animal:
+    animal = Animal(nome=nome, especie_id=especie_id, raca_id=raca_id, cliente_id=cliente_id)
     
     # INSERT INTO ANIMAL values (id, nome, especie, raca, cliente_id)
     db.session.add(animal)
@@ -36,7 +36,7 @@ def add_animal(nome: str, especie: str, raca: str, cliente_id: int) -> Animal:
 
     return animal
 
-def update_animal(id: int, nome: str, especie: str, raca: str, cliente_id: int) -> Animal:
+def update_animal(id: int, nome: str, especie_id: int, raca_id: int, cliente_id: int) -> Animal:
     """
     Update a Animal in the database.
 
@@ -51,15 +51,15 @@ def update_animal(id: int, nome: str, especie: str, raca: str, cliente_id: int) 
         raise Exception
     
     animal.nome = nome
-    animal.especie = especie
-    animal.raca = raca
+    animal.especie_id = especie_id
+    animal.raca_id = raca_id
     animal.cliente_id = cliente_id
 
     db.session.commit()
 
     return animal
 
-def delete_animal(animal_id) -> Animal:
+def delete_animal(animal_id:int) -> Animal:
     """
     Delete one animal stored in the database.
 

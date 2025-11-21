@@ -2,9 +2,9 @@ import re
 from marshmallow import Schema, ValidationError, fields, validates
 from flask_restful import Resource, abort
 from flask_apispec.views import MethodResource
-from flask_apispec import marshal_with
-from sqlalchemy.exc import OperationalError
-from src.services.AnimalService import getAllAnimais, get_animal_by_id
+from flask_apispec import marshal_with, use_kwargs
+from sqlalchemy.exc import OperationalError, IntegrityError
+from src.services.AnimalService import getAllAnimais, get_animal_by_id, addAnimal, updateAnimal, deleteAnimal
 
 class AnimalResponseSchema(Schema):
     id = fields.Int()
@@ -37,6 +37,17 @@ class AnimalList(MethodResource, Resource):
         except OperationalError:
             abort(500, message="Internal Server Error")
 
+    @use_kwargs(AnimalRequestSchema, location=("form"))
+    @marshal_with(AnimalResponseSchema)
+    def post(self, **kwargs):
+        try:
+            animal = addAnimal(**kwargs)
+            return animal, 201
+        except IntegrityError as err:
+            abort(500, message=str(err.__context__))
+        except OperationalError as err:
+            abort(500, message=str(err.__context__))
+
 class AnimalItem(MethodResource, Resource):
     @marshal_with(AnimalResponseSchema)
     def get(self, animal_id):
@@ -45,5 +56,25 @@ class AnimalItem(MethodResource, Resource):
             if not animal:
                 abort(404, message="Animal not found")
             return animal, 200
+        except OperationalError:
+            abort(500, message="Internal Server Error")
+
+    @use_kwargs(AnimalRequestSchema, location=("form"))
+    @marshal_with(AnimalResponseSchema)
+    def put(self, animal_id, **kwargs):
+        try:
+            animal = updateAnimal(id=animal_id, **kwargs)
+            return animal, 201
+        except IntegrityError as err:
+            abort(500, message=str(err.__context__))
+        except OperationalError as err:
+            abort(500, message=str(err.__context__))
+
+    def delete(self, animal_id):
+        try:
+            animal = deleteAnimal(animal_id)
+            if not animal:
+                abort(404, message="Animal not found")
+            return 204
         except OperationalError:
             abort(500, message="Internal Server Error")

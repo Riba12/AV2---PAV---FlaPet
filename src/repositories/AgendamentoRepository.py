@@ -1,6 +1,7 @@
-from src.entities.Agendamento import Agendamento
+from src.entities.Agendamento import Agendamento, StatusAgendamento
 from src.entities.Base import db
 from datetime import datetime
+from sqlalchemy import func
 
 def get_lista_agendamentos()-> list:
     """
@@ -27,15 +28,32 @@ def get_agendamento_by_id(agendamento_id: int)-> Agendamento:
     
     return agendamento
 
-def add_agendamento(data_hora: str, animal_id: int, servico_id: int) -> Agendamento:
+def get_agendamentos_dia_by_animal_id(animal_id: int, data_hora: datetime, ignore_id: int = None) -> list:
+    """
+    Get all agendamentos for a specific animal for a specific day, ignores cancelado status.
+
+    Returns:
+        agendamentos (list) -- list of agendamentos for the given animal for a specific day.
+    """
+    # SELECT * FROM AGENDAMENTO WHERE animal_id=animal_id AND data_hora=data
+    data =data_hora.date()
+    agendamentos = db.session.query(Agendamento)\
+        .filter(Agendamento.animal_id == animal_id)\
+        .filter(func.date(Agendamento.data_hora) == data)\
+        .filter(Agendamento.status != StatusAgendamento.CANCELADO)
+    if ignore_id:
+        agendamentos = agendamentos.filter(Agendamento.id != ignore_id)
+    
+    return agendamentos.all()
+
+def add_agendamento(data_hora: datetime, animal_id: int, servico_id: int) -> Agendamento:
     """
     Insert a Agendamento in the database.
     Returns:
         agendamento (Agendamento) -- inserted agendamento.
     """
 
-    data = datetime.fromisoformat(data_hora)
-    agendamento = Agendamento(data_hora=data, animal_id=animal_id, servico_id=servico_id)
+    agendamento = Agendamento(data_hora=data_hora, animal_id=animal_id, servico_id=servico_id)
     
     # INSERT INTO AGENDAMENTO values ( data, animal_id, servico_id)
     db.session.add(agendamento)
@@ -45,7 +63,7 @@ def add_agendamento(data_hora: str, animal_id: int, servico_id: int) -> Agendame
 
     return agendamento
 
-def update_agendamento(id: int, data_hora: str, animal_id: int, servico_id: int) -> Agendamento:
+def update_agendamento(id: int, data_hora: datetime, animal_id: int, servico_id: int) -> Agendamento:
     """
     Update a Agendamento in the database.
 
@@ -59,8 +77,7 @@ def update_agendamento(id: int, data_hora: str, animal_id: int, servico_id: int)
     if(not agendamento):
         raise Exception
     
-    data = datetime.fromisoformat(data_hora)
-    agendamento.data_hora = data
+    agendamento.data_hora = data_hora
     agendamento.animal_id = animal_id
     agendamento.servico_id = servico_id
 
@@ -83,7 +100,7 @@ def delete_agendamento(agendamento_id: int) -> Agendamento:
         raise Exception
 
     # DELETE FROM AGENDAMENTO WHERE id=agendamento_id
-    db.session.delete(agendamento)
+    agendamento.status = StatusAgendamento.CANCELADO
 
     # Confirma a execução
     db.session.commit()
