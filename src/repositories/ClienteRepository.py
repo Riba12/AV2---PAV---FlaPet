@@ -26,6 +26,18 @@ def get_cliente_by_id(cliente_id: int) -> Cliente:
     
     return cliente
 
+def get_cliente_by_cpf(cpf: str) -> Cliente:
+    """
+    Get one cliente stored in the database by CPF.
+
+    Returns:
+        cliente (Cliente) -- find one cliente registered.
+    """
+    # SELECT * FROM CLIENTE WHERE cpf=cpf
+    cliente = db.session.query(Cliente).filter_by(cpf=cpf).first()
+    
+    return cliente
+
 def add_cliente(nome: str, cpf: str, telefone: str) -> Cliente:
     """
     Insert a Cliente in the database.
