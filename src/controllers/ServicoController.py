@@ -69,6 +69,6 @@ class ServicoItem(MethodResource, Resource):
             servico = deleteServico(servico_id)
             if not servico:
                 abort(404, message="Servico not found")
-            return 204
+            return '',204
         except OperationalError:
             abort(500, message="Internal Server Error")

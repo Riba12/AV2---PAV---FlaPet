@@ -32,7 +32,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="Agendamentos">
      <attribute name="title">
@@ -70,7 +70,7 @@
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
-     <widget class="QPushButton" name="AdicionarBT">
+     <widget class="QPushButton" name="AdicionarAgeBT">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -88,7 +88,7 @@
        <string>Adicionar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="EditarBT">
+     <widget class="QPushButton" name="EditarAgeBT">
       <property name="geometry">
        <rect>
         <x>290</x>
@@ -106,7 +106,7 @@
        <string>Editar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="ExcluirBT">
+     <widget class="QPushButton" name="ExcluirAgeBT">
       <property name="geometry">
        <rect>
         <x>520</x>
@@ -124,26 +124,36 @@
        <string>Excluir</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="AtualizaAgeBT">
       <property name="geometry">
        <rect>
-        <x>1000</x>
+        <x>950</x>
         <y>50</y>
         <width>101</width>
-        <height>51</height>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
-       <string>ATU</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../../../../../Downloads/refresh_10397787.png</normaloff>../../../../../../Downloads/refresh_10397787.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="FinalizarAgeBT">
       <property name="geometry">
        <rect>
-        <x>820</x>
-        <y>60</y>
-        <width>151</width>
-        <height>41</height>
+        <x>750</x>
+        <y>50</y>
+        <width>181</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -192,7 +202,7 @@
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
-     <widget class="QPushButton" name="EditarBT_2">
+     <widget class="QPushButton" name="EditarCliBT">
       <property name="geometry">
        <rect>
         <x>420</x>
@@ -210,7 +220,7 @@
        <string>Editar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="AdicionarBT_2">
+     <widget class="QPushButton" name="AdicionarCliBT">
       <property name="geometry">
        <rect>
         <x>100</x>
@@ -228,10 +238,10 @@
        <string>Adicionar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="ExcluirBT_2">
+     <widget class="QPushButton" name="ExcluirCliBT">
       <property name="geometry">
        <rect>
-        <x>730</x>
+        <x>690</x>
         <y>50</y>
         <width>211</width>
         <height>61</height>
@@ -244,6 +254,29 @@
       </property>
       <property name="text">
        <string>Excluir</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AtualizaCliBT">
+      <property name="geometry">
+       <rect>
+        <x>950</x>
+        <y>50</y>
+        <width>101</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../../../../../Downloads/refresh_10397787.png</normaloff>../../../../../../Downloads/refresh_10397787.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
       </property>
      </widget>
     </widget>
@@ -283,7 +316,7 @@
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
-     <widget class="QPushButton" name="EditarBT_3">
+     <widget class="QPushButton" name="EditarAniBT">
       <property name="geometry">
        <rect>
         <x>420</x>
@@ -301,7 +334,7 @@
        <string>Editar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="AdicionarBT_3">
+     <widget class="QPushButton" name="AdicionarAniBT">
       <property name="geometry">
        <rect>
         <x>100</x>
@@ -319,10 +352,10 @@
        <string>Adicionar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="ExcluirBT_3">
+     <widget class="QPushButton" name="ExcluirAniBT">
       <property name="geometry">
        <rect>
-        <x>730</x>
+        <x>690</x>
         <y>50</y>
         <width>211</width>
         <height>61</height>
@@ -335,6 +368,29 @@
       </property>
       <property name="text">
        <string>Excluir</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AtualizaAniBT">
+      <property name="geometry">
+       <rect>
+        <x>950</x>
+        <y>50</y>
+        <width>101</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../../../../../Downloads/refresh_10397787.png</normaloff>../../../../../../Downloads/refresh_10397787.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
       </property>
      </widget>
     </widget>
@@ -374,7 +430,7 @@
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
-     <widget class="QPushButton" name="EditarBT_4">
+     <widget class="QPushButton" name="EditarSerBT">
       <property name="geometry">
        <rect>
         <x>420</x>
@@ -388,11 +444,14 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(255, 255, 0)</string>
+      </property>
       <property name="text">
        <string>Editar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="AdicionarBT_4">
+     <widget class="QPushButton" name="AdicionarSerBT">
       <property name="geometry">
        <rect>
         <x>100</x>
@@ -403,17 +462,23 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(85, 255, 0)</string>
       </property>
       <property name="text">
        <string>Adicionar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="ExcluirBT_4">
+     <widget class="QPushButton" name="ExcluirSerBT">
       <property name="geometry">
        <rect>
-        <x>730</x>
+        <x>690</x>
         <y>50</y>
         <width>211</width>
         <height>61</height>
@@ -424,8 +489,34 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(255, 0, 0)</string>
+      </property>
       <property name="text">
        <string>Excluir</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AtualizaSerBT">
+      <property name="geometry">
+       <rect>
+        <x>950</x>
+        <y>50</y>
+        <width>101</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../../../../../Downloads/refresh_10397787.png</normaloff>../../../../../../Downloads/refresh_10397787.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
       </property>
      </widget>
     </widget>

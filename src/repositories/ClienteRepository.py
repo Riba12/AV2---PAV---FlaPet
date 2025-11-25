@@ -9,9 +9,7 @@ def get_all_clientes() :
         clientes (Cliente) -- contains all clientes registered.
     """
     #SELECT * FROM CLIENTE
-    print("antes query")
     clientes = db.session.query(Cliente).all()
-    print("depois query")
     return clientes
 
 def get_cliente_by_id(cliente_id: int) -> Cliente:

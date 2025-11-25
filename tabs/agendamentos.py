@@ -13,6 +13,7 @@ class Agendamento:
         self.janela = janela
         self.configurar_tabela()
         self.carregar_agendamentos()
+        
 
     def configurar_tabela(self):
         colunas = ["ID", "Data", "Status", "Agendamento", "Animal"]
@@ -25,7 +26,16 @@ class Agendamento:
         header.setSectionResizeMode(2, QHeaderView.Stretch)           
         header.setSectionResizeMode(3, QHeaderView.Stretch)    
         header.setSectionResizeMode(4, QHeaderView.Stretch)           
-       
+
+    def conectar_botoes(self):
+        self.janela.AtualizaAgeBT.clicked.connect(self.atualizar)
+        self.janela.AdicionaAgeBT.clicked.connect(self.adicionar)
+
+    def atualizar(self):
+        self.carregar_agendamentos()   
+
+    # def adicionar(self):
+
 
     def criar_item_centralizado(self, texto):
         item = QTableWidgetItem(str(texto))

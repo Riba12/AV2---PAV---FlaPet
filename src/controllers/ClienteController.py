@@ -71,6 +71,6 @@ class ClienteItem(MethodResource, Resource):
             cliente = deleteCliente(cliente_id)
             if not cliente:
                 abort(404, message="Cliente not found")
-            return 204
+            return '',204
         except OperationalError:
             abort(500, message="Internal Server Error")   

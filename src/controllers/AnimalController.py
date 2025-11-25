@@ -75,6 +75,6 @@ class AnimalItem(MethodResource, Resource):
             animal = deleteAnimal(animal_id)
             if not animal:
                 abort(404, message="Animal not found")
-            return 204
+            return '',204
         except OperationalError:
             abort(500, message="Internal Server Error")
