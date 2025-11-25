@@ -7,10 +7,13 @@ from src.services.AgendamentoService import getAllAgendamentos, getAgendamentoBy
 
 class AgendamentoResponseSchema(Schema):
     id = fields.Int()
-    data_hora = fields.DateTime()
-    animal_id = fields.Int()
-    servico_id = fields.Int()
-    status = fields.Str()
+    data_hora = fields.DateTime(format='%Y-%m-%d %H:%M:%S')
+    animal_nome = fields.Str(attribute="animal.nome")
+    servico_nome = fields.Str(attribute="servico.nome")
+    status = fields.Method("get_status")
+
+    def get_status(self, obj):
+        return obj.status.name
 
 class AgendamentoRequestSchema(Schema):
     data_hora = fields.DateTime()

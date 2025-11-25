@@ -10,9 +10,9 @@ class AnimalResponseSchema(Schema):
     id = fields.Int()
     nome = fields.Str()
     idade = fields.Int()
-    cliente_id = fields.Int()
-    especie_id = fields.Int()
-    raca_id = fields.Int()
+    cliente_nome = fields.Str(attribute="cliente.nome")
+    especie_nome = fields.Str(attribute="especie.nome")
+    raca_nome = fields.Str(attribute="raca.nome")
 
 class AnimalRequestSchema(Schema):
     nome = fields.Str()
