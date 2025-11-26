@@ -1,8 +1,8 @@
 from src.repositories.RacaRepository import delete_raca, update_raca, add_raca, get_lista_racas, get_raca_by_id
 from src.repositories.EspecieRepository import get_especie_by_id
 
-def getAllRacas():
-    return get_lista_racas()
+def getAllRacas(especie_id:int=None):
+    return get_lista_racas(especie_id)
 
 def getRaca(raca_id: int):
     return get_raca_by_id(raca_id)

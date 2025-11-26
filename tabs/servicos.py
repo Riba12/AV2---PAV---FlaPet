@@ -8,41 +8,41 @@ load_dotenv()
 
 API_URL = os.getenv('API_URL')
 
-class EditServico(QDialog):
-    def __init__(self, dados, parent=None):
+class PopUpServico(QDialog):
+    def __init__(self, dados=None, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Editar Serviço")
-        self.setFixedWidth(350)
-        
-        # ID para usar no PUT depois
-        self.id_servico = dados['id']
+
+        self.dados = dados
+        self.edicao = dados is not None
+        titulo = "Editar Serviço" if self.edicao else "Novo Serviço"
+
+        self.setWindowTitle(titulo)
+        self.setFixedWidth(450)
 
         layout = QVBoxLayout()
         form_layout = QFormLayout()
 
-        # 1. Nome
         self.inputNome = QLineEdit()
-        self.inputNome.setText(dados['nome']) 
-        form_layout.addRow("Nome:", self.inputNome)
-
-        # 2. Descrição
+        self.inputNome.setPlaceholderText("Nome do serviço")
         self.inputDescricao = QLineEdit()
-        self.inputDescricao.setText(dados['descricao']) 
-        form_layout.addRow("Descrição:", self.inputDescricao)
-
-        # 3. Valor
+        self.inputDescricao.setPlaceholderText("Descrição do serviço")
         self.inputValor = QDoubleSpinBox()
         self.inputValor.setRange(0, 20000)
         self.inputValor.setPrefix("R$ ")
         self.inputValor.setDecimals(2)
-        self.inputValor.setValue(float(dados['valor'])) 
-        form_layout.addRow("Valor:", self.inputValor)
-
-        # 4. Tempo
         self.inputTempo = QSpinBox()
         self.inputTempo.setRange(1, 600)
         self.inputTempo.setSuffix(" min")
-        self.inputTempo.setValue(int(dados['tempo_minutos'])) 
+
+        if self.edicao:
+            self.inputNome.setText(dados['nome']) 
+            self.inputDescricao.setText(dados['descricao']) 
+            self.inputValor.setValue(float(dados['valor'])) 
+            self.inputTempo.setValue(int(dados['tempo_minutos'])) 
+
+        form_layout.addRow("Nome:", self.inputNome)
+        form_layout.addRow("Descrição:", self.inputDescricao)
+        form_layout.addRow("Valor:", self.inputValor)
         form_layout.addRow("Duração:", self.inputTempo)
 
         layout.addLayout(form_layout)
@@ -63,91 +63,16 @@ class EditServico(QDialog):
         }
 
         try:
-            response = requests.put(f"{API_URL}/servicos/{self.id_servico}", data=payload)
-            if response.status_code == 201: 
-                QMessageBox.information(self, "Sucesso", "Serviço atualizado!")
-                self.accept()
+            if self.edicao:
+                response = requests.put(f"{API_URL}/servicos/{self.dados['id']}", data=payload)
+                if response.status_code == 201: 
+                    QMessageBox.information(self, "Sucesso", "Serviço atualizado!")
+                    self.accept()
             else:
-                try:
-                    erro_json = response.json()
-                    msg = erro_json.get('message', str(erro_json))
-                except ValueError:
-                    msg = response.text
-                QMessageBox.warning(self, "Erro API", f"{msg}")
-                
-        except Exception as e:
-            QMessageBox.critical(self, "Erro", f"Falha na conexão: {e}")
-
-class AddServico(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Novo Serviço")
-        self.setFixedWidth(350)
-
-        layout = QVBoxLayout()
-        form_layout = QFormLayout()
-
-        # 1. Nome
-        self.inputNome = QLineEdit()
-        self.inputNome.setPlaceholderText("Ex: Banho e Tosa")
-        form_layout.addRow("Nome:", self.inputNome)
-
-        # 2. Descrição
-        self.inputDescricao = QLineEdit()
-        self.inputDescricao.setPlaceholderText("Ex: Completo com hidratação")
-        form_layout.addRow("Descrição:", self.inputDescricao)
-
-        # 3. Valor 
-        self.inputValor = QDoubleSpinBox()
-        self.inputValor.setRange(0, 20000) 
-        self.inputValor.setPrefix("R$ ")
-        self.inputValor.setDecimals(2)
-        form_layout.addRow("Valor:", self.inputValor)
-
-        # 4. Tempo em Minutos 
-        self.inputTempo = QSpinBox()
-        self.inputTempo.setRange(1, 600) 
-        self.inputTempo.setSuffix(" min")
-        self.inputTempo.setValue(30) 
-        form_layout.addRow("Duração:", self.inputTempo)
-
-        layout.addLayout(form_layout)
-
-        # Botões
-        self.botoes = QDialogButtonBox(QDialogButtonBox.Save | QDialogButtonBox.Cancel)
-        self.botoes.accepted.connect(self.salvar)
-        self.botoes.rejected.connect(self.reject)
-        layout.addWidget(self.botoes)
-
-        self.setLayout(layout)
-
-    def salvar(self):
-        nome = self.inputNome.text().strip()
-        descricao = self.inputDescricao.text().strip()
-        valor = self.inputValor.value() 
-        tempo = self.inputTempo.value() 
-
-        if not nome:
-            QMessageBox.warning(self, "Erro", "O nome do serviço é obrigatório!")
-            return
-
-        payload = {
-            "nome": nome,
-            "descricao": descricao,
-            "valor": valor,
-            "tempo_minutos": tempo
-        }
-
-        try:
-            response = requests.post(f"{API_URL}/servicos", data=payload)
-            
-            if response.status_code == 201:
-                QMessageBox.information(self, "Sucesso", "Serviço cadastrado!")
-                self.accept()
-            else:
-                msg = response.json().get('message', response.text)
-                QMessageBox.warning(self, "Erro API", f"{msg}")
-                
+                response = requests.post(f"{API_URL}/servicos", data=payload)
+                if response.status_code == 201: 
+                    QMessageBox.information(self, "Sucesso", "Serviço adicionado!")
+                    self.accept()
         except Exception as e:
             QMessageBox.critical(self, "Erro", f"Falha na conexão: {e}")
 
@@ -187,7 +112,7 @@ class Servicos:
         self.carregar_servicos()
     
     def adicionar(self):
-        dialog = AddServico(self.janela)
+        dialog = PopUpServico(parent=self.janela)
         if dialog.exec_() == QDialog.Accepted:
             self.carregar_servicos()
 
@@ -203,7 +128,7 @@ class Servicos:
             response = requests.get(f"{API_URL}/servicos/{id_servico}")
             if response.status_code == 200:
                 dados = response.json()
-                dialog = EditServico(dados, self.janela)
+                dialog = PopUpServico(dados=dados, parent=self.janela)
                 if dialog.exec_() == QDialog.Accepted:
                     self.carregar_servicos()
             else:

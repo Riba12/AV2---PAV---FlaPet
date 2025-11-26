@@ -1,7 +1,7 @@
 from src.entities.Raca import Raca
 from src.entities.Base import db
 
-def get_lista_racas() -> list:
+def get_lista_racas(especie_id:int=None) -> list:
     """
     Get all racas stored in the database.
 
@@ -10,9 +10,12 @@ def get_lista_racas() -> list:
     """
     # SELECT * FROM RACA
     # Lista de racas
-    racas = db.session.query(Raca).all()
+    racas = db.session.query(Raca)
+
+    if especie_id:
+        racas = racas.filter(Raca.especie_id == especie_id)
     
-    return racas
+    return racas.all()
 
 def get_raca_by_id(raca_id: int) -> Raca:
     """

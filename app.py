@@ -14,12 +14,12 @@ class SistemaPetShop(QtWidgets.QMainWindow):
         super().__init__()
         
         uic.loadUi('interface.ui', self)
+        self.setWindowTitle("Pet Shop FlaPet")
 
         self.clientes_tab = Cliente(self)
         self.servicos_tab = Servicos(self)
         self.animais_tab = Animal(self)
         self.agendamentos_tab = Agendamento(self)
-
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

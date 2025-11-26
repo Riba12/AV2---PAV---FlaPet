@@ -3,6 +3,7 @@ from marshmallow import Schema, ValidationError, fields, validates
 from flask_restful import Resource, abort
 from flask_apispec.views import MethodResource
 from flask_apispec import marshal_with, use_kwargs
+from flask import request
 from sqlalchemy.exc import OperationalError
 from src.services.RacaService import getAllRacas, get_raca_by_id, addRaca, updateRaca, deleteRaca
 
@@ -26,7 +27,8 @@ class RacaList(MethodResource, Resource):
     @marshal_with(RacaResponseSchema(many=True))
     def get(self):
         try:
-            racas = getAllRacas()
+            especie_id = request.args.get('especie_id', type=int)
+            racas = getAllRacas(especie_id)
             return racas, 200
         except OperationalError:
             abort(500, message="Internal Server Error")

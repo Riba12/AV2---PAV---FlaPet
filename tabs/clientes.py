@@ -8,31 +8,33 @@ load_dotenv()
 
 API_URL = os.getenv('API_URL')
 
-class EditCliente(QDialog):
-    def __init__(self, dados, parent=None):
+class PopUpCliente(QDialog):
+    def __init__(self, dados=None, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Editar Cliente")
-        self.setFixedWidth(350)
-        
-        # ID para usar no PUT depois
-        self.id_cliente = dados['id']
+
+        self.dados = dados
+        self.edicao = dados is not None
+        titulo = "Editar Cliente" if self.edicao else "Novo Cliente"
+        self.setWindowTitle(titulo)
+        self.setFixedWidth(450)
 
         layout = QVBoxLayout()
         form_layout = QFormLayout()
 
-        # 1. Nome
         self.inputNome = QLineEdit()
-        self.inputNome.setText(dados['nome']) 
-        form_layout.addRow("Nome:", self.inputNome)
-
-        # 2. CPF
+        self.inputNome.setPlaceholderText("Nome do cliente")
         self.inputCpf = QLineEdit()
-        self.inputCpf.setText(dados['cpf']) 
-        form_layout.addRow("Cpf:", self.inputCpf)
-
-        # 3. Telefone
+        self.inputCpf.setPlaceholderText("CPF do cliente")
         self.inputTelefone = QLineEdit()
-        self.inputTelefone.setText(dados['telefone']) 
+        self.inputTelefone.setPlaceholderText("Telefone do cliente")
+
+        if self.edicao:
+            self.inputNome.setText(dados['nome']) 
+            self.inputCpf.setText(dados['cpf']) 
+            self.inputTelefone.setText(dados['telefone']) 
+
+        form_layout.addRow("Nome:", self.inputNome)
+        form_layout.addRow("Cpf:", self.inputCpf)
         form_layout.addRow("Telefone:", self.inputTelefone)
 
         layout.addLayout(form_layout)
@@ -52,80 +54,16 @@ class EditCliente(QDialog):
         }
 
         try:
-            response = requests.put(f"{API_URL}/clientes/{self.id_cliente}", data=payload)
-            if response.status_code == 201: 
-                QMessageBox.information(self, "Sucesso", "Cliente atualizado!")
-                self.accept()
+            if self.edicao:
+                response = requests.put(f"{API_URL}/clientes/{self.dados['id']}", data=payload)
+                if response.status_code == 201: 
+                    QMessageBox.information(self, "Sucesso", "Cliente atualizado!")
+                    self.accept()
             else:
-                try:
-                    erro_json = response.json()
-                    msg = erro_json.get('message', str(erro_json))
-                except ValueError:
-                    msg = response.text
-                QMessageBox.warning(self, "Erro API", f"{msg}")
-                
-        except Exception as e:
-            QMessageBox.critical(self, "Erro", f"Falha na conexão: {e}")
-
-class AddCliente(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Novo Cliente")
-        self.setFixedWidth(350)
-
-        layout = QVBoxLayout()
-        form_layout = QFormLayout()
-
-        # 1. Nome
-        self.inputNome = QLineEdit()
-        self.inputNome.setPlaceholderText("Ex: Fulano de tal")
-        form_layout.addRow("Nome:", self.inputNome)
-
-        # 2. CPF
-        self.inputCpf = QLineEdit()
-        self.inputCpf.setPlaceholderText("Ex: xxx.xxx.xxx-xx")
-        form_layout.addRow("CPF:", self.inputCpf)
-
-        # 3. Telefone 
-        self.inputTelefone = QLineEdit()
-        self.inputTelefone.setPlaceholderText("Ex: (xx) xxxx-xxxx")
-        form_layout.addRow("Telefone:", self.inputTelefone)
-
-        layout.addLayout(form_layout)
-
-        # Botões
-        self.botoes = QDialogButtonBox(QDialogButtonBox.Save | QDialogButtonBox.Cancel)
-        self.botoes.accepted.connect(self.salvar)
-        self.botoes.rejected.connect(self.reject)
-        layout.addWidget(self.botoes)
-
-        self.setLayout(layout)
-
-    def salvar(self):
-        nome = self.inputNome.text().strip()
-        cpf = self.inputCpf.text().strip()
-        telefone = self.inputTelefone.text().strip()
-
-        if not nome:
-            QMessageBox.warning(self, "Erro", "O nome do serviço é obrigatório!")
-            return
-
-        payload = {
-            "nome": nome,
-            "cpf": cpf,
-            "telefone": telefone
-        }
-
-        try:
-            response = requests.post(f"{API_URL}/clientes", data=payload)
-            
-            if response.status_code == 201:
-                QMessageBox.information(self, "Sucesso", "Cliente cadastrado!")
-                self.accept()
-            else:
-                msg = response.json().get('message', response.text)
-                QMessageBox.warning(self, "Erro API", f"{msg}")
-                
+                response = requests.post(f"{API_URL}/clientes", data=payload)
+                if response.status_code == 201:
+                    QMessageBox.information(self, "Sucesso", "Cliente cadastrado!")
+                    self.accept()                       
         except Exception as e:
             QMessageBox.critical(self, "Erro", f"Falha na conexão: {e}")
 
@@ -158,7 +96,7 @@ class Cliente:
         self.carregar_clientes()
 
     def adicionar(self):
-        dialog = AddCliente(self.janela)
+        dialog = PopUpCliente(parent=self.janela)
         if dialog.exec_() == QDialog.Accepted:
             self.carregar_clientes()
 
@@ -174,7 +112,7 @@ class Cliente:
             response = requests.get(f"{API_URL}/clientes/{cliente_id}")
             if response.status_code == 200:
                 dados = response.json()
-                dialog = EditCliente(dados, self.janela)
+                dialog = PopUpCliente(dados=dados, parent=self.janela)
                 if dialog.exec_() == QDialog.Accepted:
                     self.carregar_clientes()
             else:
