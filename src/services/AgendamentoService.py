@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from src.repositories import ServicoRepository
 from src.repositories import AgendamentoRepository
-from src.entities.Agendamento import Agendamento
+from src.entities.Agendamento import Agendamento, StatusAgendamento
 
 FUSO_BR = ZoneInfo("America/Sao_Paulo")
 
@@ -68,5 +68,9 @@ def updateAgendamento(agendamento_id: int, data_hora: datetime, animal_id: int, 
     
     return AgendamentoRepository.update_agendamento(agendamento_id, data_hora_inicio, animal_id, servico_id)
 
-def deleteAgendamento(agendamento_id: int):
-    return AgendamentoRepository.delete_agendamento(agendamento_id)
+def updateStatusAgendamento(agendamento_id: int, status: str):
+    try:
+        status_enum = StatusAgendamento(status.upper())
+    except ValueError:
+        raise ValueError("Status inválido para o agendamento.")
+    return AgendamentoRepository.update_status_agendamento(agendamento_id, status_enum)

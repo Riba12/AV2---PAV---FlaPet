@@ -32,7 +32,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Agendamentos">
      <attribute name="title">
@@ -81,11 +81,14 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(85, 255, 0)</string>
+       <string notr="true">background-color:rgb(85, 255, 0);border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Adicionar</string>
@@ -102,11 +105,15 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(255, 255, 0)</string>
+       <string notr="true">background-color:rgb(255, 255, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Editar</string>
@@ -123,14 +130,18 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(255, 0, 0)</string>
+       <string notr="true">background-color:rgb(255, 0, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
-       <string>Excluir</string>
+       <string>Cancelar</string>
       </property>
      </widget>
      <widget class="QPushButton" name="AtualizaAgeBT">
@@ -141,6 +152,10 @@
         <width>101</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+background-color: rgb(52, 52, 255);</string>
       </property>
       <property name="text">
        <string/>
@@ -167,8 +182,15 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+background-color: rgb(29, 44, 255);</string>
       </property>
       <property name="text">
        <string>Finalizar</string>
@@ -222,11 +244,15 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(255, 255, 0)</string>
+       <string notr="true">background-color:rgb(255, 255, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Editar</string>
@@ -243,11 +269,15 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(85, 255, 0)</string>
+       <string notr="true">background-color:rgb(85, 255, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Adicionar</string>
@@ -264,11 +294,15 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(255, 0, 0)</string>
+       <string notr="true">background-color:rgb(255, 0, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Excluir</string>
@@ -282,6 +316,10 @@
         <width>101</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+background-color: rgb(52, 52, 255);</string>
       </property>
       <property name="text">
        <string/>
@@ -345,11 +383,15 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(255, 255, 0)</string>
+       <string notr="true">background-color:rgb(255, 255, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Editar</string>
@@ -366,11 +408,15 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(85, 255, 0)</string>
+       <string notr="true">background-color:rgb(85, 255, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Adicionar</string>
@@ -387,11 +433,15 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(255, 0, 0)</string>
+       <string notr="true">background-color:rgb(255, 0, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Excluir</string>
@@ -405,6 +455,10 @@
         <width>101</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+background-color: rgb(52, 52, 255);</string>
       </property>
       <property name="text">
        <string/>
@@ -475,7 +529,8 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(255, 255, 0)</string>
+       <string notr="true">background-color:rgb(255, 255, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Editar</string>
@@ -499,7 +554,8 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(85, 255, 0)</string>
+       <string notr="true">background-color:rgb(85, 255, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Adicionar</string>
@@ -523,7 +579,8 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:rgb(255, 0, 0)</string>
+       <string notr="true">background-color:rgb(255, 0, 0);
+border-radius: 10px;</string>
       </property>
       <property name="text">
        <string>Excluir</string>
@@ -537,6 +594,10 @@
         <width>101</width>
         <height>61</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+background-color: rgb(52, 52, 255);</string>
       </property>
       <property name="text">
        <string/>
@@ -575,6 +636,8 @@
      <string>FlaPet </string>
     </property>
    </widget>
+   <zorder>label</zorder>
+   <zorder>Categorizador</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

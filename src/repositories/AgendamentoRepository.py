@@ -80,29 +80,24 @@ def update_agendamento(id: int, data_hora: datetime, animal_id: int, servico_id:
     agendamento.data_hora = data_hora
     agendamento.animal_id = animal_id
     agendamento.servico_id = servico_id
+    agendamento.status = StatusAgendamento.PENDENTE
 
     db.session.commit()
 
     return agendamento
 
-def delete_agendamento(agendamento_id: int) -> Agendamento:
+def update_status_agendamento(id: int, status: str) -> Agendamento:
     """
-    Delete one agendamento stored in the database.
+    Update a Agendamento status in the database.
 
     Returns:
-        agendamento (Agendamento) -- deleted agendamento.
+        agendamento (Agendamento) -- updated agendamento.
     """
-    # Verifica se o agendamento existe
     # SELECT * FROM AGENDAMENTO WHERE id=agendamento_id
-    agendamento = db.session.query(Agendamento).get(agendamento_id)
+    agendamento = db.session.query(Agendamento).get(id)
+    
+    agendamento.status = status
 
-    if(not agendamento):
-        raise Exception
-
-    # DELETE FROM AGENDAMENTO WHERE id=agendamento_id
-    agendamento.status = StatusAgendamento.CANCELADO
-
-    # Confirma a execução
     db.session.commit()
 
-    return agendamento 
+    return agendamento
