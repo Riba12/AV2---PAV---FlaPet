@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>40</y>
+      <y>100</y>
       <width>1101</width>
-      <height>761</height>
+      <height>701</height>
      </rect>
     </property>
     <property name="font">
@@ -32,7 +32,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Agendamentos">
      <attribute name="title">
@@ -84,6 +84,9 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(85, 255, 0)</string>
+      </property>
       <property name="text">
        <string>Adicionar</string>
       </property>
@@ -102,6 +105,9 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(255, 255, 0)</string>
+      </property>
       <property name="text">
        <string>Editar</string>
       </property>
@@ -119,6 +125,9 @@
        <font>
         <pointsize>20</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(255, 0, 0)</string>
       </property>
       <property name="text">
        <string>Excluir</string>
@@ -216,6 +225,9 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(255, 255, 0)</string>
+      </property>
       <property name="text">
        <string>Editar</string>
       </property>
@@ -234,6 +246,9 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(85, 255, 0)</string>
+      </property>
       <property name="text">
        <string>Adicionar</string>
       </property>
@@ -251,6 +266,9 @@
        <font>
         <pointsize>20</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(255, 0, 0)</string>
       </property>
       <property name="text">
        <string>Excluir</string>
@@ -330,6 +348,9 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(255, 255, 0)</string>
+      </property>
       <property name="text">
        <string>Editar</string>
       </property>
@@ -348,6 +369,9 @@
         <pointsize>20</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(85, 255, 0)</string>
+      </property>
       <property name="text">
        <string>Adicionar</string>
       </property>
@@ -365,6 +389,9 @@
        <font>
         <pointsize>20</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(255, 0, 0)</string>
       </property>
       <property name="text">
        <string>Excluir</string>
@@ -441,7 +468,10 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
@@ -486,7 +516,10 @@
       </property>
       <property name="font">
        <font>
+        <family>Courier New</family>
         <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
@@ -520,6 +553,27 @@
       </property>
      </widget>
     </widget>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>10</y>
+      <width>241</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Courier New</family>
+      <pointsize>34</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>FlaPet </string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
