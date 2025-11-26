@@ -1,0 +1,10 @@
+Flask==3.1.2
+flask_apispec==0.11.4
+Flask_RESTful==0.3.10
+flask_sqlalchemy==3.1.1
+marshmallow==4.1.0
+PyQt5==5.15.11
+PyQt5_sip==12.16.1
+python-dotenv==1.2.1
+Requests==2.32.5
+SQLAlchemy==2.0.44
